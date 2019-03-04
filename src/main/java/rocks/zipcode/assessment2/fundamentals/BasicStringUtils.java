@@ -45,13 +45,17 @@ public class BasicStringUtils {
      * @return `string` with `charactersToRemove` removed
      */
     public static String removeCharacters(String string, String charactersToRemove) {
-        String answer = string;
+        char[] removal = charactersToRemove.toCharArray();
+        StringBuilder input = new StringBuilder(string);
 
-        for (int i = 0; i < charactersToRemove.length()-1 ; i++) {
-            answer.replace(String.valueOf(charactersToRemove.charAt(i)), "");
+        for (int i = 0; i < charactersToRemove.length(); i++) {
+            for (int j = 0; j < input.length(); j++) {
+                if(input.charAt(j) == removal[i]){
+                    input.deleteCharAt(j);
+                }
+            }
         }
-
-        return answer;
+        return input.toString();
     }
 
     /**
@@ -60,6 +64,8 @@ public class BasicStringUtils {
      * @return reverse of `string` with `charactersToRemove` removed
      */
     public static String removeCharactersThenReverse(String string, String charactersToRemove) {
-        return null;
+        String temp = removeCharacters(string,charactersToRemove);
+        return reverse(temp);
+
     }
 }
